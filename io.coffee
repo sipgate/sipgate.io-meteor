@@ -14,7 +14,7 @@ class Sipgate
         self._onEvent 'newCall', currentCall
         response = """
         <?xml version="1.0" encoding="UTF-8"?>
-        <Response onHangup="#{url}io/hangup/#{this.params.userId}">
+        <Response onHangup="#{Meteor.absoluteUrl()}io/hangup/#{this.params.userId}">
         </Response>"""
         this.setContentType 'application/xml'
         response
