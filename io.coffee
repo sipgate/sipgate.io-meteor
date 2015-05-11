@@ -23,13 +23,10 @@ class Sipgate
         response
 
       "io/hangup/:userId": post: (data) ->
-        console.log "Hangup!"
         this.userId = this.params.userId
         callData = Sipgate.parsePost data
         call = new Call(self._Calls.findOne _id:callData.callId)
-        console.log(call)
         call.hangup()
-        console.log(call)
         self._Calls.update _id:call._id, call
         self._onEvent 'hangup', call
         response = """
