@@ -14,7 +14,7 @@ Package.onUse(function(api) {
   api.versionsFrom('1.1.0.2');
   api.addFiles( [ 'io.coffee', 'call.coffee' ], "server" );
   api.use('coffeescript');
-  api.use('cfs:http-methods');
+  api.use('cfs:http-methods@0.0.29');
   api.export([ 'Sipgate', 'Call' ]);
 });
 
