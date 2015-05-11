@@ -7,6 +7,9 @@ class Sipgate
     self = this
     HTTP.methods
       "io/call/:userId": post: (data) ->
+        domain = this.requestHeaders.host
+        protocol = this.requestHeaders["x-forwarded-proto"]
+        url = protocol+"://"+domain+"/"
         this.userId = this.params.userId
         callData = Sipgate.parsePost data
         currentCall = new Call(callData)
@@ -14,17 +17,20 @@ class Sipgate
         self._onEvent 'newCall', currentCall
         response = """
         <?xml version="1.0" encoding="UTF-8"?>
-        <Response onHangup="#{Meteor.absoluteUrl()}io/hangup/#{this.params.userId}">
+        <Response onHangup="#{url}io/hangup/#{this.params.userId}">
         </Response>"""
         this.setContentType 'application/xml'
         response
 
       "io/hangup/:userId": post: (data) ->
+        console.log "Hangup!"
         this.userId = this.params.userId
         callData = Sipgate.parsePost data
-        call = self.Calls.findOne _id:callData.callId
+        call = new Call(self._Calls.findOne _id:callData.callId)
+        console.log(call)
         call.hangup()
-        self.Calls.Update _id:call._id, call
+        console.log(call)
+        self._Calls.update _id:call._id, call
         self._onEvent 'hangup', call
         response = """
         <?xml version="1.0" encoding="UTF-8"?>
