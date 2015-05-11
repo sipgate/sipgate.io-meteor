@@ -38,9 +38,9 @@ class Sipgate
 
   @parsePost: (input="") ->
     result = {}
-    parts = input.toString().split('&')
+    parts = input.toString().split '&'
     parts.forEach (part) ->
-      divided = part.split('=')
+      divided = part.split '='
       result[divided[0]] = divided[1]
     result
 

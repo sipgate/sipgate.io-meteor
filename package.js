@@ -1,6 +1,6 @@
 Package.describe({
   name: 'sipgate:io',
-  version: '0.0.3',
+  version: '0.0.4',
   // Brief, one-line summary of the package.
   summary: 'use sipgate.io in meteor',
   // URL to the Git repository containing the source code for this package.
@@ -19,9 +19,12 @@ Package.onUse(function(api) {
 });
 
 Package.onTest(function(api) {
-  api.use('tinytest');
-  api.use('sipgate:io');
-  api.use('coffeescript');
-  api.use('cfs:http-methods');
-  api.addFiles('io-tests.js');
+//api.use('sipgate:io', 'client');
+  api.use('coffeescript', "client");
+  api.use([ 'tinytest', 'test-helpers' ], 'client');
+  api.addFiles([ 'io.coffee', 'call.coffee', 'call-tests.coffee', 'io-tests.coffee' ], "client");
+  api.export([ 'Sipgate', 'Call' ]);
+
+//
+
 });
