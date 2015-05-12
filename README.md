@@ -8,7 +8,7 @@ check out the [tutorial](TUTORIAL.md) on how to create a simple project
 ##Sample
 
 ### JavaScript
-```JavaScript
+```js
 sipgate = new Sipgate();
 sipgate.events({
   newCall: function(call) {
@@ -21,7 +21,7 @@ sipgate.events({
 ```
 
 ### CoffeeScript
-```CoffeeScript
+```coffee
 sipgate = new Sipgate()
 sipgate.events
   newCall: (call) ->

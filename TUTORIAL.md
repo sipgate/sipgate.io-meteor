@@ -19,22 +19,26 @@ Note: The 1 after call is just a placeholder we use because there is no user han
 ###Go
 **1)** create a new meteor project
 
-    meteor create sipgateiotest
-    cd sipgateiotest
+```bash
+meteor create sipgateiotest
+cd sipgateiotest
+```
 
 **2)** add the sipgate:io package
 
-    meteor add sipgate:io
+```bash
+meteor add sipgate:io
+```
 
 **3)** create lib/collections.js to setup the collection on the server and client
 
-```JavaScript
+```js
 Calls = new Meteor.Collection("calls");
 ```
 
 **4)** create server/sipgateio.js to insert calls into "Calls" collection
 
-```JavaScript
+```js
 sipgate = new Sipgate();
 sipgate.events({
   // insert new calls into collection
@@ -49,11 +53,20 @@ sipgate.events({
 ```
 **5)** change the full content of sipgateiotest.js to
 
-```JavaScript
+```js
 if (Meteor.isClient) {
   Template.phoneCalls.helpers({
     phoneCalls: function () {
-      return Calls.find({});
+      return Calls.find({}, {sort: {startDate: -1}});
+    },
+    from: function() {
+      return this.from.replace(/^49/, "0");
+    },
+    to: function() {
+      return this.from.replace(/^49/, "0");
+    },
+    startDate: function() {
+      return this.startDate.toLocaleString();
     }
   });
 }
@@ -61,7 +74,7 @@ if (Meteor.isClient) {
 
 **6)** change the full content of sipgateiotest.html to
 
-```HTML
+```html
 <head>
   <title>sipgateiotest</title>
 </head>
@@ -75,7 +88,11 @@ if (Meteor.isClient) {
 <template name="phoneCalls">
   <ul>
     {{#each phoneCalls}}
-      <li>Direction: {{direction}} from: {{from}} to:{{to}}</li>
+      <li>
+        <span class="date">{{startDate}}</span>
+        <span class="label">{{direction}}</span>
+        <strong>{{from}}</strong> &rarr; <strong>{{to}}</strong>
+      </li>
     {{/each}}
   </ul>
 </template>
@@ -83,4 +100,12 @@ if (Meteor.isClient) {
 
 **7)** run meteor from the command line
 
+```bash
     meteor
+```
+
+**8)** Ok. Looks kind of messy... As a bonus we make it look nice:
+
+```bash
+    curl -L -o nice.css "http://git.io/vUzgO"
+```
