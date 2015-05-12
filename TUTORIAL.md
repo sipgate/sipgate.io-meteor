@@ -15,6 +15,10 @@ to setup your sipgate account enter the following URLs for incoming and outgoing
     [http://yourdomain.com]/io/call/1
 
 Note: The 1 after call is just a placeholder we use because there is no user handling in our app
+###The video
+
+[![sipgate.io with Meteor](http://img.youtube.com/vi/ML8YFLuNNW0/0.jpg)](https://www.youtube.com/watch?v=ML8YFLuNNW0)
+
 
 ###Go
 **1)** create a new meteor project
