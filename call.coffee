@@ -4,7 +4,7 @@ class Call
     @to = data.to
     @_id = data._id || data.callId
     @direction = data.direction
-    @startDate = new Date()
+    @startDate = data.startDate || new Date()
     @active = true
     @user = this.userId
 
