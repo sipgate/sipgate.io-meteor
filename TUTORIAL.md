@@ -114,5 +114,5 @@ if (Meteor.isClient) {
 **8)** Ok. Looks kind of messy... As a bonus we make it look nice:
 
 ```bash
-    curl -L -o nice.css "http://git.io/vUzgO"
+    curl -L -o nice.css "http://git.io/vTOOJ"
 ```
