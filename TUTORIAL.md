@@ -71,6 +71,9 @@ if (Meteor.isClient) {
     },
     startDate: function() {
       return this.startDate.toLocaleString();
+    },
+    callState: function() {
+      return this.active ? "active" : "inactive";
     }
   });
 }
@@ -92,7 +95,7 @@ if (Meteor.isClient) {
 <template name="phoneCalls">
   <ul>
     {{#each phoneCalls}}
-      <li>
+      <li class="state {{callState}}">
         <span class="date">{{startDate}}</span>
         <span class="label">{{direction}}</span>
         <strong>{{from}}</strong> &rarr; <strong>{{to}}</strong>
