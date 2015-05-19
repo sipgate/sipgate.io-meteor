@@ -67,7 +67,7 @@ if (Meteor.isClient) {
       return this.from.replace(/^49/, "0");
     },
     to: function() {
-      return this.from.replace(/^49/, "0");
+      return this.to.replace(/^49/, "0");
     },
     startDate: function() {
       return this.startDate.toLocaleString();
