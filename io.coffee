@@ -8,7 +8,8 @@ class Sipgate
     HTTP.methods
       "io/call/:userId": post: (data) ->
         domain = this.requestHeaders.host
-        protocol = this.requestHeaders["x-forwarded-proto"]
+        protocols = this.requestHeaders["x-forwarded-proto"].split ","
+        protocol = protocols[0]
         url = protocol+"://"+domain+"/"
         this.userId = this.params.userId
         callData = Sipgate.parsePost data
