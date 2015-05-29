@@ -18,8 +18,8 @@ class Sipgate
         self._onEvent 'newCall', currentCall
         response = """
         <?xml version="1.0" encoding="UTF-8"?>
-        <Response onHangup="#{url}io/hangup/#{this.params.userId}">
-        </Response>"""
+        <Response onHangup="#{url}io/hangup/#{this.params.userId}" />
+        """
         this.setContentType 'application/xml'
         response
 
@@ -27,7 +27,7 @@ class Sipgate
         this.userId = this.params.userId
         callData = Sipgate.parsePost data
         call = new Call(self._Calls.findOne _id:callData.callId)
-        call.hangup()
+        call.hangup(callData.cause)
         self._Calls.update _id:call._id, call
         self._onEvent 'hangup', call
         response = """
