@@ -12,7 +12,7 @@ Package.describe({
 
 Package.onUse(function(api) {
   api.versionsFrom('1.1.0.2');
-  api.addFiles( [ 'io.coffee', 'call.coffee' ], "server" );
+  api.addFiles( [ 'sipgate.coffee', 'call.coffee' ], 'server' );
   api.use('coffeescript');
   api.use('cfs:http-methods@0.0.29');
   api.export([ 'Sipgate', 'Call' ]);
@@ -21,7 +21,7 @@ Package.onUse(function(api) {
 Package.onTest(function(api) {
   api.use('coffeescript', "client");
   api.use([ 'tinytest', 'test-helpers' ], 'client');
-  api.addFiles([ 'io.coffee', 'call.coffee' ]);
+  api.addFiles([ 'sipgate.coffee', 'call.coffee' ]);
   api.addFiles([ 'tests/client/call-tests.coffee', 'tests/client/io-tests.coffee' ], "client");
   api.export([ 'HTTP', 'Sipgate', 'Call' ]);
 });
