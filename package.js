@@ -19,12 +19,9 @@ Package.onUse(function(api) {
 });
 
 Package.onTest(function(api) {
-//api.use('sipgate:io', 'client');
   api.use('coffeescript', "client");
   api.use([ 'tinytest', 'test-helpers' ], 'client');
-  api.addFiles([ 'io.coffee', 'call.coffee', 'call-tests.coffee', 'io-tests.coffee' ], "client");
-  api.export([ 'Sipgate', 'Call' ]);
-
-//
-
+  api.addFiles([ 'io.coffee', 'call.coffee' ]);
+  api.addFiles([ 'tests/client/call-tests.coffee', 'tests/client/io-tests.coffee' ], "client");
+  api.export([ 'HTTP', 'Sipgate', 'Call' ]);
 });

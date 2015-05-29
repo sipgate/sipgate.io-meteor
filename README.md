@@ -32,3 +32,6 @@ sipgate.events
 
 ##Setup
 set up ***http://yourdomain.com***/io/call/***userid*** for incoming and outgoing calls in sipgate.io
+
+##Tests
+to run the tests execute `meteor test-packages ./` on the command line
