@@ -8,6 +8,7 @@ class Call
     @active = true
     @user = this.userId
 
-  hangup: ->
+  hangup: (cause)->
     @active = false
     @endDate = new Date()
+    @cause = cause
