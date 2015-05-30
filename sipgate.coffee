@@ -2,6 +2,7 @@ class Sipgate
   _calls: {}
   _callEvents: {}
   _Calls: new Meteor.Collection('_sipgateIoCalls')
+  response: new SipgateResponse()
 
   constructor: ->
     self = this
@@ -14,14 +15,13 @@ class Sipgate
         this.userId = this.params.userId
         callData = Sipgate.parsePost data
         currentCall = new Call(callData)
-        self._Calls.insert currentCall;
+        self._Calls.insert currentCall
+        self.response = new SipgateResponse(url+"io/hangup/"+this.params.userId)
         self._onEvent 'newCall', currentCall
-        response = """
-        <?xml version="1.0" encoding="UTF-8"?>
-        <Response onHangup="#{url}io/hangup/#{this.params.userId}" />
-        """
+        response = self.response.xml()
+
         this.setContentType 'application/xml'
-        response
+        response+"\n"
 
       "io/hangup/:userId": post: (data) ->
         this.userId = this.params.userId
