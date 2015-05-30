@@ -1,3 +1,5 @@
+#sipgate.io-meteor [![Build Status](https://travis-ci.org/sipgate/sipgate.io-meteor.svg?branch=master)](https://travis-ci.org/sipgate/sipgate.io-meteor)
+
 Handle phone calls from meteor using [sipgate.io](https://github.com/sipgate/sipgate.io)
 check out the [tutorial](TUTORIAL.md) on how to create a simple project
 
