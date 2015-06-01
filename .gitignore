@@ -1,0 +1,5 @@
+# JetBrains IDEs: IntelliJ, RubyMine, PhpStorm, AppCode, PyCharm
+.idea/
+
+# OS X
+.DS_Store
