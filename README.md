@@ -33,7 +33,7 @@ sipgate.events
 ```
 
 ##Setup
-set up ***http://yourdomain.com***/io/call/***userid*** for incoming and outgoing calls in sipgate.io
+Set up ***http://yourdomain.com***/io/call/***userid*** for incoming and outgoing calls in the sipgate.io settings of your sipgate team, sipgate basic or simquadrat account. If you are not using the *Meteor accounts package*, you can set a placeholder like 1 as userid.
 
 ##Tests
 to run the tests execute `meteor test-packages ./` on the command line
