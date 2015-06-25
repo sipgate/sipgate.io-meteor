@@ -1,6 +1,6 @@
 Package.describe({
   name: 'sipgate:io',
-  version: '0.0.9',
+  version: '0.0.10',
   // Brief, one-line summary of the package.
   summary: 'use sipgate.io in meteor',
   // URL to the Git repository containing the source code for this package.
