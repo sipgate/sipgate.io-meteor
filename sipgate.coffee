@@ -16,7 +16,7 @@ class Sipgate
         callData = Sipgate.parsePost data
         currentCall = new Call(callData)
         self._Calls.insert currentCall
-        self.response = new SipgateResponse(url+"io/hangup/"+this.params.userId)
+        self.response = new SipgateResponse(url+"io/answer/"+this.params.userId, url+"io/hangup/"+this.params.userId)
         self._onEvent 'newCall', currentCall
         response = self.response.xml()
 
