@@ -23,6 +23,18 @@ class Sipgate
         this.setContentType 'application/xml'
         response+"\n"
 
+      "io/answer/:userId": post: (data) ->
+        this.userId = this.params.userId
+        callData = Sipgate.parsePost data
+        call = new Call(self._Calls.findOne _id:callData.callId)
+        self._Calls.update _id:call._id, call
+        self._onEvent 'answer', call
+        response = """
+        <?xml version="1.0" encoding="UTF-8"?>
+        <Response><!--empty request--></Response>"""
+        this.setContentType 'application/xml'
+        response
+
       "io/hangup/:userId": post: (data) ->
         this.userId = this.params.userId
         callData = Sipgate.parsePost data
