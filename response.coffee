@@ -9,7 +9,7 @@ class SipgateResponse
     if this._actions.length == 0
       return """
       <?xml version="1.0" encoding="UTF-8"?>
-      <Response onAnswer=""#{@_answerUrl}" onHangup="#{@_hangupUrl}" />"""
+      <Response onAnswer="#{@_answerUrl}" onHangup="#{@_hangupUrl}" />"""
 
     responseXml = ""
     for action in this._actions
@@ -17,7 +17,7 @@ class SipgateResponse
 
     return """
     <?xml version="1.0" encoding="UTF-8"?>
-    <Response onAnswer=""#{@_answerUrl}" onHangup="#{@_hangupUrl}">#{responseXml}</Response>"""
+    <Response onAnswer="#{@_answerUrl}" onHangup="#{@_hangupUrl}">#{responseXml}</Response>"""
 
   action: (action) ->
     this._actions.push action
