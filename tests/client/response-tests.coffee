@@ -1,4 +1,22 @@
-Tinytest.add 'response - should return basic response XML when empty', (test) ->
+Tinytest.add 'response - should return basic response XML when on params set', (test) ->
+  response = new SipgateResponse()
+  test.equal response.xml(), """
+  <?xml version="1.0" encoding="UTF-8"?>
+  <Response />"""
+
+Tinytest.add 'response - should return basic response XML with onAnswer param only', (test) ->
+  response = new SipgateResponse("http://no.url")
+  test.equal response.xml(), """
+  <?xml version="1.0" encoding="UTF-8"?>
+  <Response onAnswer="http://no.url" />"""
+
+Tinytest.add 'response - should return basic response XML with onHangup param only', (test) ->
+  response = new SipgateResponse(null, "http://no.url")
+  test.equal response.xml(), """
+  <?xml version="1.0" encoding="UTF-8"?>
+  <Response onHangup="http://no.url" />"""
+
+Tinytest.add 'response - should return basic response XML with callback url, without actions', (test) ->
   response = new SipgateResponse("http://no.url", "http://no.url")
   test.equal response.xml(), """
   <?xml version="1.0" encoding="UTF-8"?>
