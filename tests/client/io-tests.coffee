@@ -4,10 +4,10 @@
 class HTTP
   @definedMethods: {}
   requestHeaders:
-    host:"none"
+    host: "none"
   @methods: (params) ->
     HTTP.definedMethods = params
-    return
+    params
 
 
 Tinytest.add 'io - parsePost should assign post data to Object', (test) ->
@@ -23,6 +23,10 @@ Tinytest.add 'io - instance should be created successfully', (test) ->
 Tinytest.add 'io - call path post should be listened to', (test) ->
   io = new Sipgate
   test.instanceOf HTTP.definedMethods["io/call/:userId"].post, Function
+
+Tinytest.add 'io - answer path post should be listened to', (test) ->
+  io = new Sipgate()
+  test.instanceOf HTTP.definedMethods['io/answer/:userId'].post, Function
 
 Tinytest.add 'io - hangup path post should be listened to', (test) ->
   io = new Sipgate
