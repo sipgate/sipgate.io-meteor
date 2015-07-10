@@ -11,9 +11,7 @@ class HTTP
 
 
 Tinytest.add 'io - parsePost should assign post data to Object', (test) ->
-  tempData = {}
   parsed = Sipgate.parsePost("a=b&c=d")
-
   test.equal parsed.c, "d"
 
 Tinytest.add 'io - instance should be created successfully', (test) ->

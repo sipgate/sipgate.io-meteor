@@ -1,11 +1,23 @@
 class SipgateResponse
   _actions: []
-  constructor: (answerUrl = null, hangupUrl = null)->
+  _answerUrl: null
+  _hangupUrl: null
+
+  constructor: ->
     @_actions = []
+    #@_answerUrl = answerUrl
+    #@_hangupUrl = hangupUrl
+
+  setAnswerUrl: (answerUrl) ->
     @_answerUrl = answerUrl
+
+  setHangupUrl: (hangupUrl) ->
     @_hangupUrl = hangupUrl
 
-  xml: ->
+  setAction: (action) ->
+    this._actions.push action
+
+  generateResponseXml: ->
     responseXml = ""
     responseXml += """<?xml version="1.0" encoding="UTF-8"?>\n"""
     responseXml += "<Response"
@@ -29,5 +41,4 @@ class SipgateResponse
 
     responseXml
 
-  action: (action) ->
-    this._actions.push action
+

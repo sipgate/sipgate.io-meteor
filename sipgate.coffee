@@ -16,17 +16,26 @@ class Sipgate
         callData = Sipgate.parsePost data
         currentCall = new Call(callData)
         self._Calls.insert currentCall
-        self.response = new SipgateResponse(url+"io/hangup/"+this.params.userId)
+
+        userEvents = self._events()
+
+        if userEvents.answer
+          self.response.setAnswerUrl(url+"io/answer/"+this.params.userId)
+
+        if userEvents.hangup
+          self.response.setHangupUrl(url+"io/hangup/"+this.params.userId)
+
         self._onEvent 'newCall', currentCall
-        response = self.response.xml()
+        response = self.response.generateResponseXml()
 
         this.setContentType 'application/xml'
         response+"\n"
 
       "io/answer/:userId": post: (data) ->
-        this.userId = this.params.userId
+        self.userId = self.params.userId
         callData = Sipgate.parsePost data
         call = new Call(self._Calls.findOne _id:callData.callId)
+        call.answer()
         self._Calls.update _id:call._id, call
         self._onEvent 'answer', call
         response = """
@@ -42,6 +51,7 @@ class Sipgate
         call.hangup(callData.cause)
         self._Calls.update _id:call._id, call
         self._onEvent 'hangup', call
+        self._Calls.remove _id:call._id
         response = """
         <?xml version="1.0" encoding="UTF-8"?>
         <Response><!--empty request--></Response>"""
@@ -51,6 +61,9 @@ class Sipgate
   _onEvent: (eventType, call) ->
     for callback in @_callEvents[eventType]
       callback call
+
+  _events: ->
+    @_callEvents
 
   @parsePost: (input="") ->
     result = {}

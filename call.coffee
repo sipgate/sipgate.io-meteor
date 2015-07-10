@@ -5,8 +5,11 @@ class Call
     @_id = data._id || data.callId
     @direction = data.direction
     @startDate = data.startDate || new Date()
-    @active = true
     @user = this.userId
+
+  answer: ->
+    @answerDate = new Date()
+    @active = true
 
   hangup: (cause)->
     @active = false
