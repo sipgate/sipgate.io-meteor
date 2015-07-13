@@ -32,7 +32,7 @@ class Sipgate
         response+"\n"
 
       "io/answer/:userId": post: (data) ->
-        self.userId = self.params.userId
+        this.userId = this.params.userId
         callData = Sipgate.parsePost data
         call = new Call(self._Calls.findOne _id:callData.callId)
         call.answer()
