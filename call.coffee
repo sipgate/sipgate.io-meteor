@@ -6,10 +6,12 @@ class Call
     @direction = data.direction
     @startDate = data.startDate || new Date()
     @user = this.userId
+    @sipgateUser = data.user
 
-  answer: ->
+  answer: (data) ->
     @answerDate = new Date()
     @active = true
+    @sipgateUser = data.user
 
   hangup: (cause)->
     @active = false

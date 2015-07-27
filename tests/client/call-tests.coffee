@@ -14,17 +14,16 @@ Tinytest.add 'call - date - should store startDate when created', (test) ->
     callId: '1'
     direction: ''
   )
-  myCall.hangup("any cause")
-  test.equal myCall.cause, "any cause"
+  test.instanceOf myCall.startDate, Date
 
-Tinytest.add 'call - should be active when when answered', (test) ->
+Tinytest.add 'call - should be active when answered', (test) ->
   myCall = new Call(
     from: ''
     to: ''
     callId: '1'
     direction: ''
   )
-  myCall.answer()
+  myCall.answer("some user")
   test.isTrue myCall.active
 
 Tinytest.add 'call - date - should store answerDate when call answered', (test) ->
@@ -34,7 +33,7 @@ Tinytest.add 'call - date - should store answerDate when call answered', (test) 
     callId: '1'
     direction: ''
   )
-  myCall.answer()
+  myCall.answer("some user")
   test.instanceOf myCall.answerDate, Date
 
 Tinytest.add 'call - should be inactive after hangup', (test) ->
@@ -66,3 +65,4 @@ Tinytest.add 'call - date - should store endDate on hangup', (test) ->
   )
   myCall.hangup("any cause")
   test.instanceOf myCall.endDate, Date
+

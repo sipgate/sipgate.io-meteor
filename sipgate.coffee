@@ -35,7 +35,7 @@ class Sipgate
         this.userId = this.params.userId
         callData = Sipgate.parsePost data
         call = new Call(self._Calls.findOne _id:callData.callId)
-        call.answer()
+        call.answer(callData)
         self._Calls.update _id:call._id, call
         self._onEvent 'answer', call
         response = """
@@ -69,8 +69,17 @@ class Sipgate
     result = {}
     parts = input.toString().split '&'
     parts.forEach (part) ->
-      divided = part.split '='
-      result[divided[0]] = divided[1]
+      [key, value] = part.split '='
+
+      value = decodeURIComponent(value.replace(/\+/g," ")) #decodeURIComponent doesn't replace the +-encoded spaces :(
+
+      # There can be several user-params when calling a group
+      if (key == 'user')
+        if (!result['user']?)
+          result['user'] = []
+        result['user'].push(value)
+      else
+        result[key] = value
     result
 
   events: (events) ->
