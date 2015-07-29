@@ -71,10 +71,11 @@ class Sipgate
     parts.forEach (part) ->
       [key, value] = part.split '='
 
+      key = decodeURIComponent(key)
       value = decodeURIComponent(value.replace(/\+/g," ")) #decodeURIComponent doesn't replace the +-encoded spaces :(
 
       # There can be several user-params when calling a group
-      if (key == 'user')
+      if (key == 'user[]')
         if (!result['user']?)
           result['user'] = []
         result['user'].push(value)
