@@ -9,9 +9,15 @@ class Sipgate
     HTTP.methods
       "io/call/:userId": post: (data) ->
         domain = this.requestHeaders.host
-        protocols = this.requestHeaders["x-forwarded-proto"].split ","
-        protocol = protocols[0]
-        url = protocol+"://"+domain+"/"
+        proto = this.requestHeaders["x-forwarded-proto"]
+        if proto
+          protocols = proto.split ","
+          protocol = protocols[0]
+          url = protocol+"://"+domain+"/"
+        else
+          url = Meteor.absoluteUrl()
+
+
         this.userId = this.params.userId
         callData = Sipgate.parsePost data
         currentCall = new Call(callData)
