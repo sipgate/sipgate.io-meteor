@@ -5,7 +5,7 @@ class Call
     @_id = data._id || data.callId
     @direction = data.direction
     @startDate = data.startDate || new Date()
-    @user = this.userId
+    @user = data.userId
     @sipgateUser = data.user
 
   answer: (data) ->
