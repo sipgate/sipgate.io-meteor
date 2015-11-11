@@ -18,8 +18,8 @@ class Sipgate
           url = Meteor.absoluteUrl()
 
 
-        this.userId = this.params.userId
         callData = Sipgate.parsePost data
+        callData.userId = this.params.userId
         currentCall = new Call(callData)
         self._Calls.insert currentCall
 
@@ -38,8 +38,8 @@ class Sipgate
         response+"\n"
 
       "io/answer/:userId": post: (data) ->
-        this.userId = this.params.userId
         callData = Sipgate.parsePost data
+        callData.userId = this.params.userId
         call = new Call(self._Calls.findOne _id:callData.callId)
         call.answer(callData)
         self._Calls.update _id:call._id, call
@@ -51,8 +51,8 @@ class Sipgate
         response
 
       "io/hangup/:userId": post: (data) ->
-        this.userId = this.params.userId
         callData = Sipgate.parsePost data
+        callData.userId = this.params.userId
         call = new Call(self._Calls.findOne _id:callData.callId)
         call.hangup(callData.cause)
         self._Calls.update _id:call._id, call
