@@ -4,4 +4,3 @@ node_js:
 before_install:
   - "curl -L http://git.io/ejPSng | /bin/sh"
 sudo: required
-env: METEOR_RELEASE=1.0.3.1
