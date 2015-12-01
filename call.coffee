@@ -4,16 +4,16 @@ class Call
     @to = data.to
     @callid = data._id || data.callId
     @direction = data.direction
-    @startDate = data.startDate || new Date()
+    @date = data.startDate || ''
     @user = data.userId
     @sipgateUser = data.user
 
   answer: (data) ->
-    @answerDate = new Date()
+    @date = ''
     @active = true
     @sipgateUser = data.user
 
   hangup: (cause)->
     @active = false
-    @endDate = new Date()
+    @date = ''
     @cause = cause
