@@ -14,8 +14,8 @@ class SipgateResponse
   setHangupUrl: (hangupUrl) ->
     @_hangupUrl = hangupUrl
 
-  setAction: (action) ->
-    this._actions.push action
+  setActions: (actions) ->
+    this._actions = actions
 
   generateResponseXml: ->
     responseXml = ""

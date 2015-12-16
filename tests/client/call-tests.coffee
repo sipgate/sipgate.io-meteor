@@ -56,6 +56,16 @@ Tinytest.add 'call - should store cause on hangup', (test) ->
   myCall.hangup("any cause")
   test.equal myCall.cause, "any cause"
 
+Tinytest.add 'call - should store last dtmf event', (test) ->
+  myCall = new Call(
+    from: ''
+    to: ''
+    callId: '1'
+    direction: ''
+  )
+  myCall.dtmf("1")
+  test.equal myCall.dtmf, "1"
+
 Tinytest.add 'call - date - should store endDate on hangup', (test) ->
   myCall = new Call(
     from: ''

@@ -17,11 +17,12 @@ class Sipgate
         else
           url = Meteor.absoluteUrl()
 
-
         callData = Sipgate.parsePost data
         callData.userId = this.params.userId
         currentCall = new Call(callData)
         self._Calls.insert currentCall
+
+        actions = self._onEvent 'newCall', currentCall
 
         userEvents = self._events()
 
@@ -31,7 +32,12 @@ class Sipgate
         if userEvents.hangup
           self.response.setHangupUrl(url+"io/hangup/"+this.params.userId)
 
-        self._onEvent 'newCall', currentCall
+        if actions
+          for action in actions
+            if action instanceof SipgateResponseActionGather
+              action.setDataUrl(url+"io/dtmf/"+this.params.userId)
+            self.response.setActions(actions)
+
         response = self.response.generateResponseXml()
 
         this.setContentType 'application/xml'
@@ -64,9 +70,50 @@ class Sipgate
         this.setContentType 'application/xml'
         response
 
+      "io/dtmf/:userId": post: (data) ->
+        domain = this.requestHeaders.host
+        proto = this.requestHeaders["x-forwarded-proto"]
+        if proto
+          protocols = proto.split ","
+          protocol = protocols[0]
+          url = protocol+"://"+domain+"/"
+        else
+          url = Meteor.absoluteUrl()
+
+        callData = Sipgate.parsePost data
+        callData.userId = this.params.userId
+        call = new Call(self._Calls.findOne _id:callData.callId)
+        call.dtmf(callData.dtmf)
+        self._Calls.update _id:call._id, call
+
+        actions = self._onEvent 'dtmf', call
+
+        userEvents = self._events()
+
+        if userEvents.answer
+          self.response.setAnswerUrl(url+"io/answer/"+this.params.userId)
+
+        if userEvents.hangup
+          self.response.setHangupUrl(url+"io/hangup/"+this.params.userId)
+
+        if actions
+          for action in actions
+            if action instanceof SipgateResponseActionGather
+              action.setDataUrl(url+"io/dtmf/"+this.params.userId)
+          self.response.setActions(actions)
+
+        response = self.response.generateResponseXml()
+
+        this.setContentType 'application/xml'
+        response+"\n"
+
   _onEvent: (eventType, call) ->
+    value = null
     for callback in @_callEvents[eventType]
-      callback call
+      currentValue = callback call
+      if currentValue
+        value = currentValue
+    value
 
   _events: ->
     @_callEvents

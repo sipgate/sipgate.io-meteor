@@ -14,14 +14,14 @@ Package.onUse(function(api) {
   api.versionsFrom('1.1.0.2');
   api.use('coffeescript');
   api.use('cfs:http-methods@0.0.30');
-  api.addFiles(['response.coffee', 'response/action.coffee', 'response/action/hangup.coffee', 'response/action/play.coffee', 'response/action/dial.coffee', 'response/action/reject.coffee', 'sipgate.coffee', 'call.coffee' ], 'server');
-  api.export(['SipgateResponse', 'SipgateResponseAction', 'SipgateResponseActionHangup', 'SipgateResponseActionPlay', 'SipgateResponseActionDial', 'SipgateResponseActionReject', 'Sipgate', 'Call']);
+  api.addFiles(['response.coffee', 'response/action.coffee', 'response/action/hangup.coffee', 'response/action/play.coffee', 'response/action/dial.coffee', 'response/action/reject.coffee', 'response/action/gather.coffee', 'sipgate.coffee', 'call.coffee' ], 'server');
+  api.export(['SipgateResponse', 'SipgateResponseAction', 'SipgateResponseActionHangup', 'SipgateResponseActionPlay', 'SipgateResponseActionDial', 'SipgateResponseActionReject', 'SipgateResponseActionGather', 'Sipgate', 'Call']);
 });
 
 Package.onTest(function(api) {
   api.use('coffeescript', ['client', 'server']);
   api.use(['tinytest', 'test-helpers' ], 'client');
-  api.addFiles(['response.coffee', 'response/action.coffee', 'response/action/hangup.coffee', 'response/action/play.coffee', 'response/action/dial.coffee', 'response/action/reject.coffee', 'sipgate.coffee', 'call.coffee']);
+  api.addFiles(['response.coffee', 'response/action.coffee', 'response/action/hangup.coffee', 'response/action/play.coffee', 'response/action/dial.coffee', 'response/action/reject.coffee', 'response/action/gather.coffee', 'sipgate.coffee', 'call.coffee']);
   api.addFiles(['tests/client/call-tests.coffee', 'tests/client/io-tests.coffee', 'tests/client/response-tests.coffee' ], "client");
-  api.export(['SipgateResponse', 'SipgateResponseAction', 'SipgateResponseActionHangup', 'SipgateResponseActionPlay', 'SipgateResponseActionDial', 'SipgateResponseActionReject', 'HTTP', 'Sipgate', 'Call']);
+  api.export(['SipgateResponse', 'SipgateResponseAction', 'SipgateResponseActionHangup', 'SipgateResponseActionPlay', 'SipgateResponseActionDial', 'SipgateResponseActionReject', 'SipgateResponseActionGather', 'HTTP', 'Sipgate', 'Call']);
 });

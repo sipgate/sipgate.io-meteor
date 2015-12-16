@@ -13,7 +13,10 @@ class Call
     @active = true
     @sipgateUser = data.user
 
-  hangup: (cause)->
+  hangup: (cause) ->
     @active = false
     @endDate = new Date()
     @cause = cause
+
+  dtmf: (dtmf) ->
+    @dtmf = dtmf

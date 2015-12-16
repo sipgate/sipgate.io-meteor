@@ -29,3 +29,7 @@ Tinytest.add 'io - answer path post should be listened to', (test) ->
 Tinytest.add 'io - hangup path post should be listened to', (test) ->
   io = new Sipgate
   test.instanceOf HTTP.definedMethods["io/hangup/:userId"].post, Function
+
+Tinytest.add 'io - dtmf path post should be listened to', (test) ->
+  io = new Sipgate
+  test.instanceOf HTTP.definedMethods["io/dtmf/:userId"].post, Function
