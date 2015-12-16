@@ -20,10 +20,14 @@ sipgate.events({
   },
   // optional to get notified about answer events
   answer: function (call) {
-      Calls.update(call._id, {$set: call});
+    Calls.update(call._id, {$set: call});
   },
   // optional to get notified about hangup events
   hangup: function (call) {
+    Calls.update(call._id, {$set:call});
+  },
+  // optional to get notified about dtmf events
+  dtmf: function (call) {
     Calls.update(call._id, {$set:call});
   }
 });
@@ -42,6 +46,10 @@ sipgate.events
     
   # optional to get notified about hangup events
   hangup: (call) ->
+    Calls.update call._id, $set:call
+
+  # optional to get notified about dtmf events
+  dtmf: (call) ->
     Calls.update call._id, $set:call
 ```
 
