@@ -2,7 +2,7 @@ class Call
   constructor: (data) ->
     @from = data.from
     @to = data.to
-    @_id = data._id || data.callId
+    @callid = data._id || data.callId
     @direction = data.direction
     @startDate = data.startDate || new Date()
     @user = data.userId
